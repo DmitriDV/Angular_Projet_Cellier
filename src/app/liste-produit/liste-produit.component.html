@@ -1,0 +1,77 @@
+<section>
+    <!--Bouton Voir mes celliers-->
+    <div class="create-btn">
+        <a class="liste__btn-saq-creer fill" mat-raised-button routerLink="/usager">Voir mes celliers</a>
+    </div>    
+    <!--Titre-->
+    <h3>Toutes mes bouteilles</h3>
+    <!--Filtre-->
+    <mat-form-field appearance="standard">
+    <mat-label class="filter">Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Tapez le mot de recherche" #input>
+    </mat-form-field>
+    <!--Liste des bouteilles-->
+    <div class="mat-elevation-z8">
+        <table class="table" mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef> <span>Image</span>  </th>
+                <td class="image" mat-cell *matCellDef="let bouteille">
+                    <p><img class="bouteille__img" src="{{bouteille.image}}" alt="bouteille"></p>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="nom">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="nom" > Nom </th>
+                <td mat-cell class="left" *matCellDef="let bouteille"> {{bouteille.nom}} </td>
+            </ng-container>
+            <ng-container matColumnDef="note">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="note" > Note </th>
+                <td mat-cell class="left" *matCellDef="let bouteille">
+                    <div class="note">
+                        <div class="rating-container">
+                            <div class="etoiles">
+                                <mat-icon *ngFor="let ratingId of [1, 2, 3, 4, 5]; index as i">
+                                    {{getEtoile(bouteille.note_etoiles?.note_moyenne, i+1)}}
+                                </mat-icon>({{bouteille.note_etoiles?.nombre_notes || 0}})
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="cellier_nom">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="cellier_nom" > Cellier </th>
+                <td mat-cell class="left" *matCellDef="let bouteille"><a routerLink="/cellier/{{bouteille.cellier_id_cellier}}"> {{bouteille.cellier_nom}}</a></td>
+            </ng-container>
+            <ng-container matColumnDef="quantite">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="quantite"> Quantité </th>
+                <td mat-cell *matCellDef="let bouteille"> {{bouteille.quantite}} </td>
+            </ng-container>
+            <ng-container matColumnDef="pays_nom">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="pays_nom"> Pays </th>
+                <td mat-cell *matCellDef="let bouteille"> {{bouteille.pays_nom}} </td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="type"> Type </th>
+                <td mat-cell *matCellDef="let bouteille"> {{bouteille.type}} </td>
+            </ng-container>
+            <ng-container matColumnDef="millesime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="millesime"> Millesime </th>
+                <td mat-cell *matCellDef="let bouteille"> {{bouteille.millesime}} </td>
+            </ng-container>
+            <ng-container matColumnDef="voir">
+                <th class="centre" mat-header-cell *matHeaderCellDef>Voir</th>
+                <td class="centre" mat-cell *matCellDef="let bouteille"> 
+                    <a class="liste__btn-saq" href="{{bouteille.url_saq}}" mat-raised-button color="accent">Voir SAQ</a>
+                </td>
+            </ng-container>
+              
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!--Ligne affichée lorsqu'il n'y a pas de données correspondantes-->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+        <!--Paginateur-->
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+</section>

@@ -1,0 +1,25 @@
+article {
+    top: 65px;
+    background-image: url("~src/assets/img/red.jpg");
+    background-size: cover;
+    background-position: bottom center;
+    height: 100%;
+}
+
+@media screen and (min-width: 768px){
+    .img{
+        margin-left: 2vw;
+        margin-top: -4vw;
+    }
+}
+
+.auth{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button{
+    margin-top: 10px;
+}
+

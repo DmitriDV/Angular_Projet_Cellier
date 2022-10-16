@@ -1,0 +1,11 @@
+::ng-deep body {
+    z-index: -1 !important;
+    top: -65px;
+    background-image: url("~src/assets/img/s.jpg");
+    background-size: cover;
+    background-position: bottom center;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
