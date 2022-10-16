@@ -36,14 +36,14 @@ export class DialogLoginComponent implements OnInit {
     
     /** Modèles d'expression régulière */
     courrielRegex = /^\S+$/;
-    // passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
    
 
     ngOnInit(): void {
         /** Forme et validation des données saisies */
         this.loginForm = this.formBuilder.group({
             courriel : ['', [Validators.required, Validators.pattern(this.courrielRegex)]],
-            mot_passe : ['', []]
+            mot_passe : ['', [Validators.required, Validators.pattern(this.passwordRegex)]]
         })
         this.authServ.getTitre().subscribe(leTitre =>{
             this.sTitre = leTitre;
