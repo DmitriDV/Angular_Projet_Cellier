@@ -35,7 +35,7 @@ export class DialogLoginComponent implements OnInit {
     ) { }
     
     /** Modèles d'expression régulière */
-    courrielRegex = /^\S+$/;
+    courrielRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/;
     passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
    
 
